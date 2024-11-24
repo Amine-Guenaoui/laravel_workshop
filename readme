@@ -1,0 +1,46 @@
+How to install Mysql :
+sudo apt update
+sudo apt install mysql-server
+
+Start the service : 
+sudo service mysql start
+
+
+Create your own Database : 
+sudo mysql -u root -p
+Once logged in, create a new database:
+CREATE DATABASE laravel;
+
+create new user for your database  : 
+CREATE USER 'amine'@'%' IDENTIFIED BY '123456789';
+GRANT ALL PRIVILEGES ON laravel.* TO 'amine'@'%';
+FLUSH PRIVILEGES;
+
+to see the users run this command : 
+SELECT user,host FROM mysql.user ;
+
+now exit.
+
+configure the binding address and the port : 
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+set 
+bind-address = 0.0.0.0 
+now save and exit by pressing CTRL+X and they press ENTER
+
+now restart the service :
+sudo service mysql restart
+
+
+
+now to make sure the mysql is connected install this : 
+curl -L https://gist.githubusercontent.com/GitHub30/2d51bfa327a6eddbde33b77214511584/raw/install_pdo_mysql.gh-codespaces.sh | bash
+
+
+now to start laravel app run : 
+composer install
+php artisan key:generate
+php artisan migrate
+php artisan serve
+
+open a new terminal and run :
+npm run dev ( for development purpose )
